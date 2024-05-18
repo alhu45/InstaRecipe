@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import "../Styles/ImageClassifier.css"
+
+import { MdCloudUpload, MdDelete} from 'react-icons/md'
+import { AiFillFileImage } from 'react-icons/ai' 
 
 const ImageUpload = () => {
     const [file, setFile] = useState(null);
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
+
+    const [loading, setLoading] = useState(false);
+
+    const [image, setImage] = useState(null)
+    const [fileName, setFileName] = useState("No selected file")
 
     // Function that converts the image file into Base64 encoded string
     const loadImageBase64 = (file) => {
@@ -26,8 +35,12 @@ const ImageUpload = () => {
 
     // Updates the state of the componet with the most recent file the user has selected
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
+        const selectedFile = e.target.files[0];
+        setFile(selectedFile);
+        setFileName(selectedFile.name);
+        setImage(URL.createObjectURL(selectedFile));
     };
+    
 
     const handleUpload = async () => {
         // If the file is not set, calls the state setter function from the useState hook to display an error message
@@ -35,6 +48,8 @@ const ImageUpload = () => {
             setError("Please select a file first.");
             return;
         }
+
+        setLoading(true);
 
         try {
             // Calls function to return file in Base64 string
@@ -64,32 +79,56 @@ const ImageUpload = () => {
 
             // Sets response to NULL
             setResponse(null);
+        } finally {
+            setLoading(false);
         }
     };
 
-    // return (
-    //     <div>
-    //         <center>
-    //             <input type="file" onChange={handleFileChange} />
-    //             <button onClick={handleUpload}>Upload</button>
-    //             {response && <div>Response: {JSON.stringify(response)}</div>}
-    //             {error && <div>Error: {error}</div>}
-    //         </center>
-    //     </div>
-    // );
-
     return (
-        <div>
+        <div className = "container">
             <center>
-                <input type="file" onChange={handleFileChange} />
-                <button onClick={handleUpload}>Upload</button>
-                {response && (
+                <main>
+                    <form className = "form-border" onClick = {() => document.querySelector(".input-field").click()}>
+                        <input 
+                            className='input-field' 
+                            type="file" 
+                            onChange={handleFileChange} 
+                            accept='image/*' 
+                            hidden 
+                        />
+
+                        {image ?
+                        <img src = {image} width = {275} height = {150} alt = {fileName} />
+                        :
+                        <>
+                        < MdCloudUpload color = '#1475cf' size = {60} />
+                        <p>Browse Files to Upload</p>
+                        </>
+                        }
+                    </form>
+                </main>
+{/* 
+                <input type="file" onChange={handleFileChange} /> */}
+
+                <button className = "upload" onClick={handleUpload} alt="Upload">
+                    <i>U</i>
+                    <i>P</i>
+                    <i>L</i>
+                    <i>O</i>
+                    <i>A</i>
+                    <i>D</i>
+                </button>
+
+                {/* <button onClick={handleUpload}>Upload</button> */}
+
+                {loading && <div>Loading...</div>}
+                {!loading && response && (
                     <div>
-                        <h3>Filtered Predictions:</h3>
+                        <h3>Nice! I see you have the following ingredient(s):</h3>
                         <ul>
                             {response.predictions.map((prediction, index) => (
                                 <li key={index}>
-                                    {prediction.class}: Confidence {prediction.confidence.toFixed(2)}
+                                    {prediction.class}
                                 </li>
                             ))}
                         </ul>

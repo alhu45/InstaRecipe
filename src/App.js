@@ -1,4 +1,4 @@
-import Homepage from "./Homepage.js"
+import Homepage from "./Components/Homepage.js"
 import Navbar from "./Components/Navbar.js"
 import ImageClassifier from "./Components/ImageClassifier.js";
 
