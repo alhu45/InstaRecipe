@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "https://localhost:5000",
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.4",
     "@tensorflow-models/mobilenet": "^2.1.1",
     "@tensorflow/tfjs": "^4.19.0",
     "@testing-library/jest-dom": "^5.17.0",

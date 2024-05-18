@@ -1,10 +1,30 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Components/Navbar.js";
-import Homepage from "./Components/Homepage.js";
+import Homepage from "./Components/Homepage.js"
+import Navbar from "./Components/Navbar.js"
 import ImageClassifier from "./Components/ImageClassifier.js";
+import Background from './Components/Background';
+import { useAuth0 } from '@auth0/auth0-react';
 import "./App.css";
 
+
+
 function App() {
+  const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
+
+  React.useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      loginWithRedirect();
+    }
+  }, [isLoading, isAuthenticated, loginWithRedirect]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <div>Redirecting to login...</div>;
+  }
+
   // useState for setting a JavaScript object for storing and using data
   const [data, setData] = useState([]);
 
@@ -27,7 +47,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Homepage />
+      <Background />
       <ImageClassifier />
       <div className="App">
         <header className="App-header">

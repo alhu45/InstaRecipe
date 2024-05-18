@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "../Styles/ImageClassifier.css"
-
 import { MdCloudUpload, MdDelete} from 'react-icons/md'
-import { AiFillFileImage } from 'react-icons/ai' 
 
 const ImageUpload = () => {
     const [file, setFile] = useState(null);
@@ -102,7 +100,7 @@ const ImageUpload = () => {
                         :
                         <>
                         < MdCloudUpload color = '#1475cf' size = {60} />
-                        <p>Browse Files to Upload</p>
+                        <p>Upload your ingredients for a yummy recipe!</p>
                         </>
                         }
                     </form>
