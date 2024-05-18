@@ -2,6 +2,7 @@ import { useRef } from "react";
 import {FaTimes, FaBars} from "react-icons/fa";
 import "../Styles/Navbar.css"
 import logo from "../Images/chefhatvro.webp"
+import { useAuth0 } from '@auth0/auth0-react';
 
 function Navbar() {
     const navRef = useRef();
@@ -10,6 +11,7 @@ function Navbar() {
         navRef.current.classList.toggle("responsive_nav");
     }
 
+    const { logout } = useAuth0();
 
     return(
         <header>
@@ -17,14 +19,10 @@ function Navbar() {
             <nav ref = {navRef}>
                 <a href = "/#">Find a Recipe!</a>
                 <a href = "/#">Saved Recipes</a>
-                <button className = "nav-btn nav-close-btn" onClick = {showNavbar}>
-                    <FaTimes />
+                <button className = "logout" onClick = {() => logout()}>
+                    Log Out
                 </button>
             </nav>
-            <button className = "nav-btn" onClick = {showNavbar}>
-                <FaBars />
-            </button>
-
         </header>
     );
 }

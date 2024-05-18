@@ -82,3 +82,20 @@ header .nav-btn {
         font-size: 1.5rem;
     }
 }
+
+.logout {
+    background-color: #6d9ef4;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    width: 100px;
+    height: 45px;
+    transition: .3s;
+  }
+  
+  .logout:hover {
+    background-color: #3b82f6;
+    box-shadow: 0 0 0 5px #3b83f65f;
+    color: #fff;
+  }
+  
