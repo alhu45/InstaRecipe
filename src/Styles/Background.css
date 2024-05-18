@@ -1,0 +1,89 @@
+/* Ensure the parent container is positioned relatively */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+/* Ensure the content and overlay elements are positioned absolutely within the container */
+.content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Ensure content is above the overlay */
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1; /* Ensure overlay is above the video but below the content */
+}
+
+/* Responsive Font Sizes */
+.title {
+    font-size: 5vw;
+}
+
+.about {
+    font-size: 3.5vw;
+}
+
+/* Adjust font sizes for larger screens */
+@media (min-width: 1200px) {
+    .title {
+        font-size: 70px;
+    }
+
+    .about {
+        font-size: 40px;
+    }
+}
+
+/* Adjust font sizes for medium screens */
+@media (max-width: 1199px) {
+    .title {
+        font-size: 50px;
+    }
+
+    .about {
+        font-size: 35px;
+    }
+}
+
+/* Adjust font sizes for smaller screens */
+@media (max-width: 768px) {
+    .title {
+        font-size: 40px;
+    }
+
+    .about {
+        font-size: 30px;
+    }
+}
+
+/* Adjust font sizes for very small screens */
+@media (max-width: 576px) {
+    .title {
+        font-size: 30px;
+    }
+
+    .about {
+        font-size: 25px;
+    }
+}
