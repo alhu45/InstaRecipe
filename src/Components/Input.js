@@ -17,15 +17,26 @@ function Input() {
         const fd = new FormData();
         fd.append('file', file);
 
+        setProgress(prevState => {
+            return {...prevState, started: true}
+        })
         axios.post('http:/httpbin.org/post', fd, {
-            onUploadProgress: (progressEvent) => { console.log(progressEvent.progress*100) },
+            onUploadProgress: (progressEvent) => { setProgress(prevState => {
+                return {...prevState, pc: progressEvent.progress*1000}
+            })},
             headers: {
                 "Custom-Header": "value",
 
             }
         })
-        .then(res => console.log(res.data))
-        .catch(err => console.error(err));
+        .then(res => {
+            setMsg("Upload Sucessful");
+            console.log(res.data);
+        })
+        .catch(err => {
+            setMsg("Upload Failed");
+            console.error(err)
+        });
     }
 
     return(
