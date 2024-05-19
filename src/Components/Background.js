@@ -12,9 +12,8 @@ function Background() {
             <div className="overlay"></div>
             <div className="content">
                 <h1 className="title" style={{ color: "white" }}>
-                    <center>Welcome to InstaRecipe!</center>
+                    <center>Welcome to InstaRecipe{user && user.name ? `, ${user.name}` : ''}!</center>
                 </h1>
-                {/* <h1>{JSON.stringify(user, null, 2)}</h1> */}
                 <p className="about" style={{ color: "white" }}>
                     <center>
                         Limited ingredients and don't know what to cook? InstaRecipe is here to
